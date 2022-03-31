@@ -28,4 +28,5 @@ const productSchema = new mongoose.Schema({
 })
 productSchema.index({ "$**": "text" })
 const productData = mongoose.model("productData", productSchema)
+
 module.exports = productData
