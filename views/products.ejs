@@ -72,6 +72,7 @@
 
     </ul>
   </nav>
+
   <div class="d-flex justify-content-center" style="
   height: 130px;
   background: rgb(26, 154, 158);
@@ -160,14 +161,30 @@
 
               </div> <!-- rating-wrap.// -->
             </figcaption>
+
             <div class="container-fluid" style="padding-bottom:20px">
+
               <form action="/addToCart" method="post">
                 <div class="container-fluid">
                   <input type="hidden" name="name" value="<%=data[i].id  %>">
-                  <button href="" class="btn btn-sm btn-primary float-right">Add to
+                  <button href="" class="btn btn-sm btn-primary float-right" onclick="myFunction()">Add to
                     Cart</button>
                 </div>
               </form>
+
+              <script>
+                let option = {
+                  animation: true,
+                  delay: 2000
+                }
+                myFunction = () => {
+                  let toastHTMLElement = document.getElementById("EpicToast")
+                  let toastElement = new bootstrap.Toast(toastHTMLElement, option)
+                  toastElement.show()
+                }
+
+              </script>
+
 
               <div class=" container-fluid">
                 <div class="price-wrap h5">
@@ -187,7 +204,6 @@
 
 
     </div> <!-- row.// -->
-
 
 
   </div>

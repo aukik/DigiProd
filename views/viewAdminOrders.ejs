@@ -108,6 +108,15 @@
                       </button>
                     </td>
                     <td>
+                      <form action="/deliverProduct" method="post">
+                        <input type="hidden" name="id" value="<%=cart[i]._id%>">
+                        <button class="btn btn-primary">
+                          Delivered
+                        </button>
+                      </form>
+
+                    </td>
+                    <td>
                       <%=totalPrice %>
                     </td>
                   </tr>
@@ -124,18 +133,37 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          <table class="table">
-
-                            <% for(let i=0; i < cart[i].products.length; i++) { %>
-                              <tr>
-
-                              </tr>
-
-                              <%} %>
 
 
+                          <% for(let j=0; j < cart[i].products.length; j++) { %>
+                            <div class="d-flex" style="padding-bottom: 20px;">
+                              <div class="img-wrap">
+                                <img class="img-responsive" src="<%=cart[i].products[j].image%>" style="width:200px">
 
-                          </table>
+                              </div>
+                              <div class="text-wrap" style="padding-left:20px;padding-top:20px;">
+                                <h5>
+                                  <%=cart[i].products[j].name%>
+                                </h5>
+                                <p>
+                                  <%=cart[i].products[j].tag%>
+                                </p>
+                                <h6>
+                                  Price: <%=cart[i].products[j].price%>
+                                </h6>
+                                <h6>
+                                  Category: <%=cart[i].products[j].category%>
+                                </h6>
+                              </div>
+
+                            </div>
+                            <hr>
+
+
+
+                            <%} %>
+
+
 
 
 
