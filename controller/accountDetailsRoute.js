@@ -1,7 +1,7 @@
 const express = require("express")
 const userData = require("../model/userData")
 let router = express.Router()
-//aabcsadsada
+
 router.get("/accountDetails", async (req, res) => {
   userName = req.session.username
   if (!req.session.username) return res.redirect("/signIn")
