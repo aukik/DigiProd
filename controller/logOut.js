@@ -2,6 +2,7 @@ const express = require("express")
 const adminData = require("../model/adminData")
 
 let router = express.Router()
+//gg
 
 router.get("/logOut", (req, res) => {
   if (req.session.username)
