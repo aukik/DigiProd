@@ -11,6 +11,7 @@ router.post("/accountDetails", async (req, res) => {
   userName = req.session.username
   newName = req.body.username
   errorBoolean = false
+  //gg
   if (!req.session.username) return res.redirect("/signIn")
   else {
     try {
