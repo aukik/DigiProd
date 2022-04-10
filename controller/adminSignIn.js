@@ -2,7 +2,7 @@ const express = require("express")
 const adminData = require("../model/adminData")
 
 let router = express.Router()
-
+//router
 router.get("/adminSignIn", (req, res) => {
   if (req.session.username) return res.redirect("/adminAddProduct")
   console.log(req.session.username)
