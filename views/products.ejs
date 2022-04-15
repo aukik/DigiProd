@@ -62,9 +62,9 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/accountDetails">Account Details</a>
-          <a class="dropdown-item" href="/cart">Cart</a>
+          <a class="dropdown-item" href="/cart">Cart 🛒</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/logOut">Log Out</a>
+          <a class="dropdown-item" href="/logOut">Log Out </a>
         </div>
       </li>
 
@@ -75,9 +75,10 @@
 
   <div class="d-flex justify-content-center" style="
   height: 130px;
-  background: rgb(26, 154, 158);
-  background: linear-gradient(90deg, rgb(76, 170, 177) 0%, rgb(25, 131, 163) 35%, rgb(16, 135, 139) 100%);
+  background: rgb(135, 206, 235);
+
   ">
+    <!-- background: linear-gradient(90deg, rgb(76, 170, 177) 0%, rgb(25, 131, 163) 35%, rgb(16, 135, 139) 100%); -->
     <div class="container" style="padding-top: 20px;padding-left: 600px;">
 
       <form action="/search" method="post">
@@ -164,23 +165,53 @@
 
             <div class="container-fluid" style="padding-bottom:20px">
 
-              <form action="/addToCart" method="post">
+              <form action="/addToCart" method="post" onsubmit="closed();">
+
                 <div class="container-fluid">
                   <input type="hidden" name="name" value="<%=data[i].id  %>">
-                  <button href="" class="btn btn-sm btn-primary float-right" onclick="myFunction()">Add to
+                  <button href="" class="btn btn-sm btn-primary float-right" onclick="toast();closed();">Add to
                     Cart</button>
+
                 </div>
               </form>
+              <div class="position-fixed bottom-0 end-0 p-3 d-flex flex-column gap-2" style="z-index: 11">
+                <div id='toast' class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="d-flex">
+                    <div class="toast-body">
+                      An item has been added to the cart 🛒
+                    </div>
+
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"
+                      aria-label="Close"></button>
+
+                  </div>
+                </div>
+              </div>
+
 
               <script>
+                // work().then(res => {res.id})
+
+                // async root () => {
+                //   const res = await work()
+
+                //   res.id
+                // }
+                const closed = () => {
+                  window.stop()
+                }
                 let option = {
                   animation: true,
                   delay: 2000
                 }
-                myFunction = () => {
-                  let toastHTMLElement = document.getElementById("EpicToast")
-                  let toastElement = new bootstrap.Toast(toastHTMLElement, option)
-                  toastElement.show()
+
+                const toast = () => {
+
+                  let toastElement = document.getElementById("toast")
+                  let toastCall = new bootstrap.Toast(toastElement, option)
+
+                  toastCall.show()
+
                 }
 
               </script>

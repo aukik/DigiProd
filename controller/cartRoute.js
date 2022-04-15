@@ -9,15 +9,22 @@ let router = express.Router()
 //checkout page
 router.post("/checkOut", (req, res) => {
   if (!req.session.username) return res.redirect("/signIn")
-
-  res.render("checkOut", {
-    username : req.session.username,
-    price    : req.body.price,
+  userData.findOne({ username: req.session.username }, async (err, users) => {
+    try {
+      res.render("checkOut", {
+        username : req.session.username,
+        price    : req.body.price,
+        userData : users,
+      })
+    } catch (error) {
+      console.log(error)
+    }
   })
 })
 router.post("/submitCheckout", async (req, res) => {
   if (!req.session.username) return res.redirect("/signIn")
   const listProd = []
+  let new_error = false
   userData.findOne({ username: req.session.username }, async (err, users) => {
     cartData.find({ userId: users.id }, async (err, carts) => {
       for (let i = 0; i < carts.length; i++) {
@@ -26,16 +33,34 @@ router.post("/submitCheckout", async (req, res) => {
         listProd.push(doc)
       }
 
-      const order = new orderData({
-        username : req.session.username,
-        name     : req.body.name,
-        email    : req.body.email,
-        phone    : req.body.phone,
-        payment  : req.body.payment,
-        products : getUnique(listProd),
-      })
-      //Thank you for purchasing our products. Your digital code will be sent to you soon via email.
-      await order.save()
+      userData.findOne(
+        { username: req.session.username },
+        async (err, users) => {
+          try {
+            const order = new orderData({
+              username : req.session.username,
+              name     : req.body.name,
+              email    : req.body.email,
+              phone    : req.body.phone,
+              payment  : req.body.payment,
+              products : getUnique(listProd),
+            })
+            //Thank you for purchasing our products. Your digital code will be sent to you soon via email.
+            await order.save()
+          } catch (error) {
+            console.log("ggwp")
+
+            res.render("checkOut", {
+              username : req.session.username,
+              price    : req.body.price,
+              userData : users,
+              message  : "Fill All Fields",
+              type     : "danger",
+            })
+          }
+        }
+      )
+
       cartData.deleteMany({ userId: users.id }, err => {
         console.log("notDeleted")
       })

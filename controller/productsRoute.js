@@ -78,7 +78,7 @@ router.post("/addToCart", async (req, res) => {
       })
       await cart.save()
 
-      res.redirect("products")
+      return
     })
   }
 })
