@@ -50,6 +50,7 @@
 
 
   </nav>
+
   <div class="container-fluid" style="padding-top: 20px;">
     <% if (locals.type, locals.message) { %>
       <div class="alert alert-<%= type %>" role="alert">
@@ -85,9 +86,13 @@
         <div align="left" style="padding-top:10px">
           <button class="btn btn-primary">Submit</button>
         </div>
+
       </form>
 
+
     </div>
+    <div class="position-fixed bottom-0 end-0 p-3"><a href="/adminSignIn" style="padding-right: 50px;">Sign In As
+        Admin?</a></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
