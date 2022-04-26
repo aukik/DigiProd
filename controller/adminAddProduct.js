@@ -32,7 +32,6 @@ router.post("/update", (req, res) => {
     let prodName = req.body.name.slice(0, -1)
     productName = prodName
     productData.find({ name: prodName }, (err, users) => {
-      console.log(users)
       prodDetails = users
       res.render("updateProductDetails", { data: users[0] })
     })
@@ -84,13 +83,10 @@ router.post("/delete", (req, res) => {
   }
 })
 router.post("/searchAdmin", (req, res) => {
-  console.log(req.body.searchText)
   if (!req.session.username) return res.redirect("/adminSignIn")
   productData
     .find({ $text: { $search: req.body.searchText } })
     .exec(function(err, docs) {
-      console.log("here")
-      console.log(docs)
       res.render("adminAddProduct", {
         data : docs,
       })
@@ -101,8 +97,6 @@ router.post("/filter-g", (req, res) => {
   productData
     .find({ $text: { $search: "gift cards" } })
     .exec(function(err, docs) {
-      console.log("here")
-      console.log(docs)
       res.render("adminAddProduct", {
         data : docs,
       })

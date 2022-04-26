@@ -32,10 +32,10 @@ router.post("/accountDetails", async (req, res) => {
       if (req.session.username)
         return req.session.destroy(err => {
           if (err) {
-            return console.log("err in destroy")
+            console.log("err in destroy")
+            return res.redirect("/signIn")
           }
-          console.log(userName.length)
-          console.log(userName)
+
           userData.deleteOne({ username: userName }, function(err) {
             if (err) return res.redirect("accountDetails")
             console.log("Successful deletion")

@@ -4,8 +4,11 @@ const userData = require("../model/userData")
 let router = express.Router()
 
 router.get("/signIn", (req, res) => {
+  res.status(223)
   if (req.session.username) return res.redirect("/userHome")
+
   console.log(req.session.username)
+
   res.render("signIn", { text: "abc" })
 })
 

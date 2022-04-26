@@ -1,7 +1,7 @@
 const express = require("express")
 const path = require("path")
 const bodyParser = require("body-parser")
-const mongoose = require("mongoose")
+
 //gg
 const session = require("express-session")
 const app = express()
@@ -28,8 +28,10 @@ app.use(express.urlencoded())
 app.set("view engine", "ejs")
 
 app.get("/", (req, res) => {
+  res.status(225)
   if (req.session.username) return res.redirect("/userHome")
-  else res.render("home", { text: "abc" })
+
+  res.render("home", { text: "abc" })
 })
 
 //Routing
@@ -44,19 +46,5 @@ app.use(require("./adminSignIn"))
 app.use(require("./adminAddProduct"))
 app.use(require("./adminLogOut"))
 app.use(require("./viewAdminOrders"))
-//server start
 
-mongoose
-  .connect("mongodb://localhost:27017/auth", {
-    useUnifiedTopology : true,
-    useNewUrlParser    : true,
-  })
-  .then(() => {
-    app.listen(5000, () => {
-      console.log("Server is running on Port 5000")
-    })
-  })
-const con = mongoose.connection
-con.on("open", () => {
-  console.log("database connected")
-})
+module.exports = app

@@ -50,7 +50,7 @@ router.post("/submitCheckout", async (req, res) => {
           } catch (error) {
             console.log("ggwp")
 
-            res.render("checkOut", {
+            return res.render("checkOut", {
               username : req.session.username,
               price    : req.body.price,
               userData : users,
@@ -64,7 +64,7 @@ router.post("/submitCheckout", async (req, res) => {
       cartData.deleteMany({ userId: users.id }, err => {
         console.log("notDeleted")
       })
-      res.render("orderConfirm", { username: req.session.username })
+      return res.render("orderConfirm", { username: req.session.username })
     })
   })
 })

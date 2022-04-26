@@ -70,17 +70,16 @@ router.post("/filter-cp", (req, res) => {
 })
 router.post("/addToCart", async (req, res) => {
   if (!req.session.username) return res.redirect("/signIn")
-  else {
-    userData.findOne({ username: req.session.username }, async (err, users) => {
-      const cart = new cartData({
-        userId : users.id,
-        prodId : req.body.name,
-      })
-      await cart.save()
 
-      return
-    })
-  }
+  const user = await userData.findOne({ username: req.session.username })
+
+  const cart = new cartData({
+    userId : user.id,
+    prodId : req.body.id,
+  })
+  await cart.save()
+
+  return res.sendStatus(200)
 })
 router.post("/filter-op", (req, res) => {
   if (!req.session.username) return res.redirect("/signIn")
