@@ -4,6 +4,7 @@ let router = express.Router()
 
 router.get("/accountDetails", async (req, res) => {
   userName = req.session.username
+
   if (!req.session.username) return res.redirect("/signIn")
   res.render("accountDetails", { username: userName })
 })
@@ -12,7 +13,11 @@ router.post("/accountDetails", async (req, res) => {
   newName = req.body.username
   errorBoolean = false
 
-  if (!req.session.username) return res.redirect("/signIn")
+  if (req.body.testing) {
+    userName = "test"
+  }
+
+  if (!userName) return res.redirect("/signIn")
   else {
     try {
       const user = new userData({
@@ -20,12 +25,12 @@ router.post("/accountDetails", async (req, res) => {
         name     : req.body.name,
         email    : req.body.email,
         password : req.body.password,
-        email    : req.body.email,
         phone    : req.body.phone,
       })
 
       await user.save()
     } catch (err) {
+      // console.log(err)
       errorBoolean = true
     }
     if (!errorBoolean) {

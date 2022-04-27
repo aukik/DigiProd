@@ -18,13 +18,15 @@
     "mongoose": "^6.2.8"
   },
   "devDependencies": {
+    "@shelf/jest-mongodb": "^2.2.1",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "jest": "^28.0.1",
     "jest-puppeteer": "^6.1.0",
     "nodemon": "^2.0.15",
     "superagent": "^7.1.2",
-    "supertest": "^6.2.2"
+    "supertest": "^6.2.3",
+    "supertest-session": "^4.1.0"
   },
   "jest": {
     "verbose": true,

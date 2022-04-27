@@ -8,6 +8,7 @@ router.get("/viewAdminOrder", (req, res) => {
   if (!req.session.username) return res.redirect("/adminAddProduct")
 
   orderData.find({}, (err, data) => {
+    console.log(data)
     res.render("viewAdminOrders", { cart: data, totalPrice: 50 })
   })
 })
